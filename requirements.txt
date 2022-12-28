@@ -1,0 +1,4 @@
+django
+sphinx
+djangorestframework 
+django-cors-headers
