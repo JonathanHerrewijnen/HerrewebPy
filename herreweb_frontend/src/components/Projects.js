@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import '../static/Projects.css';
+import { useNavigate } from "react-router-dom";
 
 const projectItems = [
 ];
@@ -25,32 +26,32 @@ class Projects extends Component {
         return (
             <main className="content">
                 <div className="projects-grid-container">
-                    {this.state.projectItems.map(item => (
-                        <div className="projects-grid-item">
-                            <h1>{item.title}</h1>
-                            <span>{item.description}</span>
-                            <span>{item.rtd_url}</span>
-                        </div>
-                    ))}
+                        { this.state.projectItems.map(item => (
+                            <div className="project-grid-item">
+                                <h2>{item.title}</h2>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                { item.url  
+                                    ? <div className="project-url-btn">Website</div>
+                                    : <div />
+                                }
+                                { item.rtd_url  
+                                    ? <div className="project-rtd-url-btn">Documentation</div>
+                                    : <div />
+                                }                                
+                                <img className="project-image-box" src={item.image}/>
+                                <div className="description-box">{item.description}</div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        ))}
                 </div>
             </main>
-            // <main className="content">
-            //     <div className="row">
-            //         <div className="col-md-6 col-sm-10 mx-auto p-0">
-            //             <div className="card p-3">
-            //                 <ul className="list-group list-group-flush">
-            //                     {this.state.projectItems.map(item => (
-            //                         <div>
-            //                             <h1>{item.title}</h1>
-            //                             <span>{item.description}</span>
-            //                             <span>{item.rtd_url}</span>
-            //                         </div>
-            //                     ))}
-            //                 </ul>
-            //             </div>
-            //         </div>
-            //     </div>
-            // </main>
         )
     }
 }

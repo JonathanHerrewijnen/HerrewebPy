@@ -23,3 +23,14 @@ cd build/html
 python3 -m http.server
 ```
 The website can be accessed at **localhost:8000**
+
+## Development
+To run the backend server navigate to ``herreweb_backend/`` and run:
+
+> python3 manage.py runserver
+
+And for the frontend, navigate to ``herreweb_frontend`` and run:
+
+> npm start
+
+The file servers are accessible on ports 8000 and 3000.

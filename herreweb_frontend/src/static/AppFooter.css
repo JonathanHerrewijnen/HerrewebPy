@@ -1,0 +1,14 @@
+.Footer {
+    position: relative;
+    bottom: 0; /* Stick it to the bottom */
+    height: 70px;
+    width: 100vw;
+  
+    display: grid;
+    grid-template-areas: "logo nav";
+  
+    /* Cosmetics */
+    background-color: #282c34;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  
