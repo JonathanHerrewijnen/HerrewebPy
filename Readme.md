@@ -29,22 +29,8 @@ To run the backend server navigate to ``herreweb_backend/`` and run:
 
 > python3 manage.py runserver
 
-And for the frontend, navigate to ``herreweb_frontend``. Make sure you have npm and react-scripts installed, by running:
-
-> sudo apt-get install npm
-> npm i react-scripts
-
-Then run:
+And for the frontend, navigate to ``herreweb_frontend`` and run:
 
 > npm start
 
-The file servers are accessible on ports 8000 and 3000 (localhost).
-
-Create a superuser for you account using:
-
-> python3 manage.py createsuperuser
-
-Note: if running into an error regarding auth_user, be sure to migrate your database using one of the two following commands:
-
-> python3 manage.py migrate
-> python3 manage.py syncdbNo 
+The file servers are accessible on ports 8000 and 3000.
