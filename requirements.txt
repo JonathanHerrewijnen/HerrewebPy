@@ -1,2 +1,6 @@
 pandas
 numpy
+tensorflow
+sklearn
+seaborn
+scikit-learn
