@@ -1,2 +1,3 @@
 venv/
 herrewebpy.egg-info/
+herrewebpy/__pycache__/
