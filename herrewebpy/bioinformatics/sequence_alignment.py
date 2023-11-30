@@ -18,7 +18,7 @@ Date: 25 November
 Herreweb
 """
 
-def parse_sequence(sequence):
+def _parse_sequence(sequence):
     """
     Parse a sequence, either as a pandas DataFrame or a string, and return the result.
 
@@ -97,8 +97,34 @@ def write_text_format(aligned_identifiers1, aligned_identifiers2, score, output_
         with open(f'2-{output_filename}', 'w') as file: [file.write(f"{id2}\n") for id2 in aligned_identifiers2]
 
 
+def _pad_sequences(aligned_identifiers1, aligned_identifiers2, padding):
+        """
+        Add paddings (-) to sequences. Drastically helps visualize alignments.
+        """
+        padded_sequences1, padded_sequences2 = [], []
+        for seq1, seq2 in zip(aligned_identifiers1, aligned_identifiers2):
+            if seq1 == '':
+                padded_seq1 = f'{padding}' * len(seq2)
+                padded_sequences1.append(padded_seq1)
+                padded_sequences2.append(seq2)
+            elif seq2 == '':
+                padded_seq2 = f'{padding}' * len(seq1)
+                padded_sequences1.append(seq1)
+                padded_sequences2.append(padded_seq2)
+            else:
+                if len(seq1) < len(seq2):
+                    padded_seq1 = seq1 + f'{padding}' * (len(seq2) - len(seq1))
+                    padded_sequences1.append(padded_seq1)
+                    padded_sequences2.append(seq2)
+                else:
+                    padded_seq2 = seq2 + f'{padding}' * (len(seq1) - len(seq2))
+                    padded_sequences1.append(seq1)
+                    padded_sequences2.append(padded_seq2)
+        return padded_sequences1, padded_sequences2
+
+
 def global_alignment_np(sequence1, sequence2, metadata1=None, metadata2=None, gap_penalty=-1, 
-                        match_score=1, mismatch_penalty=-10, filename="alignment", threads=None):
+                        match_score=1, mismatch_penalty=-10, threads=None):
     """
     Description:
         This function performs global sequence alignment between two input sequences, `sequence1` and `sequence2`,
@@ -126,8 +152,8 @@ def global_alignment_np(sequence1, sequence2, metadata1=None, metadata2=None, ga
         ```
 
     """
-    identifiers1, metadata1 = parse_sequence(sequence1), parse_sequence(metadata1)
-    identifiers2, metadata2 = parse_sequence(sequence2), parse_sequence(metadata2)
+    identifiers1, metadata1 = _parse_sequence(sequence1), _parse_sequence(metadata1)
+    identifiers2, metadata2 = _parse_sequence(sequence2), _parse_sequence(metadata2)
     m, n = len(identifiers1), len(identifiers2)
     dp_matrix = np.zeros((m + 1, n + 1))
 
@@ -189,33 +215,14 @@ def global_alignment_np(sequence1, sequence2, metadata1=None, metadata2=None, ga
         aligned_metadata1.reverse()
         aligned_metadata2.reverse()
 
-    padded_sequences1, padded_sequences2 = [], []
-
-    for seq1, seq2 in zip(aligned_identifiers1, aligned_identifiers2):
-        if seq1 == '':
-            padded_seq1 = '-' * len(seq2)
-            padded_sequences1.append(padded_seq1)
-            padded_sequences2.append(seq2)
-        elif seq2 == '':
-            padded_seq2 = '-' * len(seq1)
-            padded_sequences1.append(seq1)
-            padded_sequences2.append(padded_seq2)
-        else:
-            if len(seq1) < len(seq2):
-                padded_seq1 = seq1 + '-' * (len(seq2) - len(seq1))
-                padded_sequences1.append(padded_seq1)
-                padded_sequences2.append(seq2)
-            else:
-                padded_seq2 = seq2 + '-' * (len(seq1) - len(seq2))
-                padded_sequences1.append(seq1)
-                padded_sequences2.append(padded_seq2)
+    padded_sequences1, padded_sequences2 =_pad_sequences(aligned_identifiers1, aligned_identifiers2, padding)
     
     return padded_sequences1, padded_sequences2, aligned_metadata1, aligned_metadata2, score
     
 
 def sequence_alignment(sequence1, sequence2, metadata1=None, metadata2=None, gap_penalty=-1, 
                        match_score=1, mismatch_penalty=-10, filename="alignment", threads=None,
-                       stockholm=True, fasta=True, clustal=False):
+                       stockholm=True, fasta=True, clustal=False, padding='-'):
     """
     Perform global sequence alignment and save the results in various formats.
 
@@ -254,7 +261,7 @@ def sequence_alignment(sequence1, sequence2, metadata1=None, metadata2=None, gap
     """
     padded_sequences1, padded_sequences2, aligned_metadata1, \
         aligned_metadata2, score = global_alignment_np(sequence1, sequence2, metadata1, metadata2, gap_penalty, 
-                                                       match_score, mismatch_penalty, threads)
+                                                       match_score, mismatch_penalty, threads, padding)
 
     if metadata1 is not None and metadata2 is not None:
         if stockholm is True:
