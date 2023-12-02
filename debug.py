@@ -1,5 +1,2 @@
-from herrewebpy.mlops import anomaly_scoring
-import seaborn as sns
-
-df = sns.load_dataset('iris')
-anomaly_scoring.train_model(df)
+from herrewebpy.bioinformatics import sequence_alignment
+sequence_alignment.SequenceAlignment(['aa', 'bb', 'cc'],['bb','aa','cc'], ['1','2','3'], ['1','2','3'])
