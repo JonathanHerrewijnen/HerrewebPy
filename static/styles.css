@@ -1,0 +1,66 @@
+body {
+    background-color: rgb(92, 41, 7);
+    color: white;
+    font-family: 'Arial', sans-serif;
+}
+
+.main-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+h1 {
+    font-family: 'Times New Roman', serif;
+    font-size: 36px;
+    margin-top: 20px;
+}
+
+.folder-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.document-button {
+    width: 150px;
+    height: 200px;
+    margin: 10px;
+    background-color: #8B4513; /* Dark SaddleBrown color */
+    border: 2px solid #8B4513;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+/* Add a papyrus-like texture to the document buttons */
+.document-button:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        repeating-linear-gradient(45deg, transparent, transparent 10px, #904e1f 10px, #7a3216 20px),
+        repeating-linear-gradient(45deg, transparent, transparent 10px, #904e1f 10px, #7a3216 20px);
+    background-size: 30px 30px;
+    border-radius: 8px;
+    z-index: -1;
+}
+
+/* Add a subtle shadow for depth */
+.document-button:hover {
+    width: 150px;
+    height: 200px;
+    margin: 10px;
+    background-color: #8B4513; /* Dark SaddleBrown color */
+    border: 2px solid #8B4513;
+    background:
+        repeating-linear-gradient(45deg, transparent, transparent 10px, #904e1f 10px, #7a3216 20px),
+        repeating-linear-gradient(45deg, transparent, transparent 10px, #904e1f 10px, #7a3216 20px);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    color: white;
+}

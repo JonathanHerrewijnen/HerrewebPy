@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repository Folders</title>
+    <title>Herreweb Repository</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Repository Folders</h1>
-    {% for folder in repository_folders %}
-        <a href="{{ url_for('repository_page', folder=folder) }}"><button>{{ folder }}</button></a>
-    {% endfor %}
+    <div class="main-container">
+        <h1>Our Projects</h1>
+        <div class="folder-container">
+            {% for folder in repository_folders %}
+                <a href="{{ url_for('repository_page', folder=folder) }}">
+                    <button class="document-button">{{ folder }}</button>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>
