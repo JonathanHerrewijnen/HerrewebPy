@@ -1,0 +1,5 @@
+django
+sphinx
+djangorestframework 
+django-cors-headers
+Pillow

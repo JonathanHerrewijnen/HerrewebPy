@@ -1,0 +1,2 @@
+https://git.herreweb.nl/JonathanHerrewijnen/HerrewebPy.git
+https://git.herreweb.nl/EljakimHerrewijnen/wifi-tally_Oostendam.git
