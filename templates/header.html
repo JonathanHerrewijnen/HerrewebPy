@@ -1,0 +1,18 @@
+<!-- header.html -->
+<header style="background-color: #461f19; padding: 10px; text-align: center;">
+    <h1 style="color: #ffd700; margin-bottom: 10px;">Herreweb</h1>
+
+    <nav>
+        <ul style="list-style-type: none; padding: 0; display: flex; gap: 10px; justify-content: center;">
+            {% for page in ['hello', 'contact', 'about'] %}
+                <li>
+                    <a href="{{ url_for(page.lower()) }}" style="text-decoration: none;">
+                        <button style="background-color: #5d4643; color: #ffd700; border: 2px solid #2b1d1b; padding: 10px; cursor: pointer; transition: all 0.3s;">
+                            {{ page }}
+                        </button>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</header>

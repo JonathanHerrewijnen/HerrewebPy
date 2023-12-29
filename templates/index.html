@@ -1,21 +1,83 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Include the header template -->
+    {% include 'header.html' %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Herreweb Repository</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            margin-bottom: -20%;
+        }
+
+        .image {
+            position: absolute;
+            top: 0;
+            left: 3%;
+            width: 70%;
+            /* Adjust as needed */
+            height: 55%;
+            object-fit: cover;
+        }
+
+        .content {
+            position: absolute;
+            top: 45%;
+            right: 0;
+            left: 55%;
+            right: 6%;
+            transform: translateY(-50%);
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            color: black;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .content:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .content a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .content a:hover {
+            color: #fff;
+        }
+    </style>
 </head>
+
 <body>
     <div class="main-container">
-        <h1>Our Projects</h1>
+        <div class="container">
+            <img src="{{ url_for('static', filename='images/frontpage/Screenshot 2023-12-29 220355.png') }}" alt="Your Image" class="image">
+
+            <div class="content" onclick="location.href='{{ url_for('strongholdkingdoms') }}';">
+                <h2><a href="{{ url_for('strongholdkingdoms') }}">Project Thelendar</a></h2>
+                <p>This project describes our adventures on the game Stronghold Kingdoms. We played a lot of games from the stronghold series, and Eljakim made a bot to automate a lot of manual stuff in Stronghold Kingdoms. This project was dubbed 'Artemis' for the visual bot, and 'Thelendar' for the headless bot.</p>
+            </div>
+        </div>
+
         <div class="folder-container">
-            {% for folder in repository_folders %}
-                <a href="{{ url_for('repository_page', folder=folder) }}">
-                    <button class="document-button">{{ folder }}</button>
-                </a>
+            {% for folder in repository_folders if folder != 'images' %}
+            <a href="{{ url_for('repository_page', folder=folder) }}">
+                <button class="document-button">{{ folder }}</button>
+            </a>
             {% endfor %}
         </div>
     </div>
+    {% include 'footer.html' %}
 </body>
+
 </html>

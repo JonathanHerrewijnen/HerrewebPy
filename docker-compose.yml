@@ -5,4 +5,5 @@ services:
       context: .
       target: dev  # specify the build target if needed
     ports:
-      - "5000:5000"
+      - "5002:5002"
+    command: ["flask", "run", "--host=0.0.0.0", "--port=5002"]

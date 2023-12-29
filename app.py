@@ -84,6 +84,17 @@ def repository_page(folder):
     else:
         return f"Documentation not found for repository folder: {folder}"
 
+@app.route('/contact')
+def contact():
+    return render_template('pages/contact.html')
+
+@app.route('/about')
+def about():
+    return render_template('pages/about.html')
+
+@app.route('/pages/strongholdkingdoms')
+def strongholdkingdoms():
+    return render_template('pages/strongholdkingdoms.html')
 
 if __name__ == "__main__":
     _clone_repositories()

@@ -14,10 +14,10 @@ RUN --mount=type=cache,target=/root/.cache/pip pip install --no-cache-dir -r req
 FROM base AS dev
 
 # Make port 5000 available to the world outside this container
-EXPOSE 5000
+EXPOSE 5001
 
 # Define environment variable
 ENV NAME World
 
 # Run app.py when the container launches
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5002"]
