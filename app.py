@@ -1,8 +1,11 @@
 from flask import Flask, render_template, redirect
-import subprocess, logging, os, shutil
+import subprocess, logging, os, shutil, datetime
+import pandas as pd
+import pythonbible as bible
 
 app = Flask(__name__, static_folder='static/')
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
+CURRENT_DATE = datetime.datetime.now().strftime('%Y-%m-%d')
 
 
 def _git_clone(repository_url, destination_folder):
@@ -92,6 +95,27 @@ def contact():
 def about():
     return render_template('pages/about.html')
 
+@app.route('/reading_plan')
+def reading_plan():
+    # Open reading plan from static folder
+    df = pd.read_csv('static/reading_plan/reading_plan_2024-09-08.csv')
+
+    # Check if the current date is in the reading plan ('Date' column)
+    if CURRENT_DATE in df['Date'].values:
+        # Get the row of the current date
+        row = df[df['Date'] == CURRENT_DATE]
+    else:
+        # If CURRENT_DATE is smaller than the smallest value in the 'Date' column, get the first row, else get the last row
+        row = df.iloc[0] if CURRENT_DATE < df['Date'].values[0] else df.iloc[-1]
+
+    # df colums are: Date,Book,Start Chapter,End Chapter
+    book = row['Book'].iloc[0]
+    start_chapter = row['Start Chapter'].iloc[0]
+    end_chapter = row['End Chapter'].iloc[0]
+
+    # Create a reading plan html page
+    return render_template('pages/reading_plan.html', book=book, start_chapter=start_chapter, end_chapter=end_chapter, reading_plan=df, date=CURRENT_DATE)
+
 @app.route('/pages/strongholdkingdoms')
 def strongholdkingdoms():
     return render_template('pages/strongholdkingdoms.html')
@@ -99,4 +123,4 @@ def strongholdkingdoms():
 if __name__ == "__main__":
     _clone_repositories()
     _buid_docs()
-    app.run(debug=True, host='0.0.0.0', port=5002)
+    app.run(debug=False, host='0.0.0.0', port=5002)

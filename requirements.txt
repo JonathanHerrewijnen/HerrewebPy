@@ -1,2 +1,4 @@
 Flask==2.1.0  # or a later version
 Werkzeug==2.0.0
+watchdog
+pythonbible

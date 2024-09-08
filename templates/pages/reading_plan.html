@@ -1,0 +1,78 @@
+<!-- reading_plan.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Plan</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Add some styles for the table and scrolling */
+        .table-container {
+            margin-top: 20px;
+            max-height: 800px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        /* Set text color to black */
+        body {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h1>Today's Reading Plan ({{ date }})</h1>
+
+        <p><strong>Book:</strong> {{ book }}</p>
+        <p><strong>Start Chapter:</strong> {{ start_chapter }}</p>
+        <p><strong>End Chapter:</strong> {{ end_chapter }}</p>
+
+        <!-- Table for the entire reading plan -->
+        <div class="table-container">
+            <h2>Full Reading Plan</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Book</th>
+                        <th>Start Chapter</th>
+                        <th>End Chapter</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in reading_plan.iterrows() %}
+                    <tr>
+                        <td>{{ row['Date'] }}</td>
+                        <td>{{ row['Book'] }}</td>
+                        <td>{{ row['Start Chapter'] }}</td>
+                        <td>{{ row['End Chapter'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Optionally, you could add navigation buttons -->
+        <div class="navigation">
+            <a href="/">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

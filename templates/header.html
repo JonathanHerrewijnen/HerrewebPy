@@ -4,7 +4,7 @@
 
     <nav>
         <ul style="list-style-type: none; padding: 0; display: flex; gap: 10px; justify-content: center;">
-            {% for page in ['hello', 'contact', 'about'] %}
+            {% for page in ['hello', 'contact', 'about', 'reading_plan'] %}
                 <li>
                     <a href="{{ url_for(page.lower()) }}" style="text-decoration: none;">
                         <button style="background-color: #5d4643; color: #ffd700; border: 2px solid #2b1d1b; padding: 10px; cursor: pointer; transition: all 0.3s;">
